@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Success</title>
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div id="wrapper">
+            {% if email != 'None' %}
+                <p id="successLayer">{{methodMsg}}</p>
+            {% endif %}
+            <h1>Email Addresses Entered:</h1>
+            {% for email in all_emails: %}
+                {% if email['id'] | int != 0 %}
+                    <form id="card{{ email['id'] }}" class="card" action='/home' method='post'>
+                        <div class="email_card">
+                            <input name="id" type="hidden" class="id" value="{{ email['id'] }}">
+                            <input name="address" type="hidden" class="id" value="{{ email['address'] }}">
+                            <p class="address" data="{{ email['address'] }}">{{ email['address'] }}</p>
+                            <p class="date" data="{{ email['date'] }}">{{ email['date'] }} {{ email['time'] }}</p>
+                            <input type="submit" name="delete" id="delete" value="D">
+                            <hr>
+                        </div>
+                    </form>
+                {% endif %}
+            {% endfor %}
+             <form id="emails" action='/home' method='post'>
+               <input type='submit' value='Back'>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Email Validation w/DB</title>
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Email Validation w/DB</h1>
+            <form action='/results' name="request" method='post'>
+                <label for="email"><span>Email Address:</span>
+                    <input type='email' name='email' id='email' value="{{session['email']}}"></label>
+
+                <span>
+                    <input type='submit' value='Submit'>
+                </span>
+            </form>
+
+            <div id="errorLayer">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <p class="{{ category }}">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </body>
+</html>
